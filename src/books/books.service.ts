@@ -1,0 +1,50 @@
+import { Injectable, NotFoundException } from '@nestjs/common';
+import { Book } from './entities/books.entity';
+import { InjectModel } from '@nestjs/mongoose';
+import { Document, Model } from 'mongoose';
+import { v4 as uuidv4 } from 'uuid';
+
+@Injectable()
+export class BooksService {
+  constructor(
+    @InjectModel(Book.name) private readonly bookModel: Model<Book>,
+  ) {}
+
+  /// ниже CRUD методы
+
+  findAllBooks() {
+    return this.bookModel.find().exec();
+  }
+  async findOneBook(id: string) {
+    const book = await this.bookModel.find({ id: id }).exec();
+    if (!book) {
+      throw new NotFoundException(`no Book with id ${id}`);
+    }
+    return book;
+  }
+
+  postNewBook(book) {
+    // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
+    book.id = uuidv4();
+    const book1 = new this.bookModel(book);
+    return book1.save();
+  }
+  async updateBook(id: string, book) {
+    const existingBook1 = await this.bookModel
+      // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+      .findOneAndUpdate({ id: id }, { $set: book }, { new: true })
+      .exec();
+
+    if (!existingBook1) {
+      throw new NotFoundException(`no Book with id ${id}`);
+    }
+
+    return existingBook1;
+  }
+  async removeBook(id: string) {
+    const book1 = await this.bookModel.deleteOne({ id: id }).exec();
+    if (!book1) {
+      throw new NotFoundException(`no Book with id ${id}`);
+    }
+  }
+}
