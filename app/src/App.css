@@ -1,0 +1,16 @@
+.App {
+  text-align: center;
+}
+
+.menu {
+  display: flex;
+  box-sizing: border-box;
+  justify-content: center;
+  margin: 5px;
+  padding: 5px;
+}
+
+a {
+  text-decoration: none;
+  color: black;
+}

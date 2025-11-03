@@ -1,0 +1,20 @@
+.menu {
+  font-size: 0.9vh;
+  font-weight: 700;
+  font-family: Arial, Helvetica, sans-serif;
+  display: flex;
+  gap: 3vh;
+  justify-content: center;
+  text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.767);
+  cursor: pointer;
+}
+
+h1 {
+  color: #e83a4b;
+}
+h1:hover {
+  border: 1px solid #e83ae8;
+  color: #e83ae8;
+  border-radius: 1vw;
+  border: 1px solid #e83a4b;
+}

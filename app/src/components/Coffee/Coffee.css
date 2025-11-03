@@ -1,0 +1,12 @@
+.coffee {
+  display: flex;
+  flex-direction: column;
+  gap: 100px;
+  color: grey;
+  background-color: burlywood;
+  border: 1px solid grey;
+  border-radius: 5px;
+  max-width: 50vw;
+  width: fit-content;
+  padding: 4px;
+}
